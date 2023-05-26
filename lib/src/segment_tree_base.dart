@@ -70,6 +70,14 @@ class SegmentTree<T> {
     return result!;
   }
 
+  T operator [](Record r){
+    var result = switch(r){
+      (int a, int b) when a <= b && a >= 0 && b <= input.length => query(a, b),
+      _ => throw ArgumentError("Invalid Record passed for query"),
+    };
+    return result;
+  }
+
   void update(int index, T newValue) {
     index += n;
     tree[index] = newValue;
