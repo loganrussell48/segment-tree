@@ -1,5 +1,5 @@
 name: segment_tree
-description: A starting point for Dart libraries or applications.
+description: A Segment Tree package
 version: 0.1.0
 repository: https://github.com/loganrussell48/segment-tree
 
