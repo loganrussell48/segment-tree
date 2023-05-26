@@ -70,7 +70,7 @@ number of bits, etc.
 
 #### A Segment Tree that returns the max in a given range with a custom merge function
 ```dart
-  maxLengthMerger(String a, String b) => (a.length >= b.length) ? a : b;
+maxLengthMerger(String a, String b) => (a.length >= b.length) ? a : b;
 var st6 = SegmentTree<String>(arr2, maxLengthMerger);
 print(st6.query(0, 2)); // Output: 'cherry'
 print(st6.query(1, 2)); // Output: 'banana' - since length is tie, the first one wins
