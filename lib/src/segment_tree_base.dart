@@ -1,4 +1,4 @@
-extension <T> on Comparable<T> {
+extension<T> on Comparable<T> {
   bool operator <=(T other) => compareTo(other) <= 0;
 }
 
@@ -14,15 +14,15 @@ class SegmentTree<T> {
     buildTree();
   }
 
-  static SegmentTree<U> min<U extends Comparable<U>>(List<U> input){
+  static SegmentTree<U> min<U extends Comparable<U>>(List<U> input) {
     return SegmentTree(input, (U a, U b) => a <= b ? a : b);
   }
 
-  static SegmentTree<U> max<U extends Comparable<U>>(List<U> input){
+  static SegmentTree<U> max<U extends Comparable<U>>(List<U> input) {
     return SegmentTree(input, (a, b) => b <= a ? a : b);
   }
 
-  static SegmentTree<U> sum<U extends Comparable<U>>(List<U> input){
+  static SegmentTree<U> sum<U extends Comparable<U>>(List<U> input) {
     return SegmentTree(input, plus<U>);
   }
 
@@ -45,7 +45,7 @@ class SegmentTree<T> {
 
     while (queryStart <= queryEnd && queryStart > 0) {
       if (queryStart % 2 == 1) {
-        result = switch(result){
+        result = switch (result) {
           null => tree[queryStart] as T,
           _ => merge(result, tree[queryStart] as T)
         };
@@ -53,7 +53,7 @@ class SegmentTree<T> {
       }
 
       if (queryEnd % 2 == 0) {
-        result = switch(result){
+        result = switch (result) {
           null => tree[queryEnd] as T,
           _ => merge(result, tree[queryEnd] as T)
         };
@@ -67,8 +67,8 @@ class SegmentTree<T> {
     return result!;
   }
 
-  T operator [](Record r){
-    var result = switch(r){
+  T operator [](Record r) {
+    var result = switch (r) {
       (int a, int b) when a <= b && a >= 0 && b <= input.length => query(a, b),
       _ => throw ArgumentError("Invalid Record passed for query"),
     };
@@ -83,5 +83,10 @@ class SegmentTree<T> {
       index ~/= 2;
       tree[index] = merge(tree[2 * index] as T, tree[2 * index + 1] as T);
     }
+  }
+
+  @override
+  String toString() {
+    return 'SegmentTree{\n\tinput: $input\n\ttree: $tree\n\tmerge: $merge\n}';
   }
 }
